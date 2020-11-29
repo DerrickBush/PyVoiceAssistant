@@ -8,7 +8,7 @@ settings.setVal('oldpid', 'DEFAULT', settings.getVal('newpid', 'DEFAULT'))
 settings.setVal('newpid', 'DEFAULT', str(os.getpid()))
 # Creates moduleDictionary and ignoreList for importing modules and gets keywords
 moduleDictionary = {}
-ignoreList = {'__init__.py', '__pycache__', 'template.py'}
+ignoreList = {'__init__.py', '__pycache__', 'template.py', 'config.json'}
 keywords = settings.getVal('keywords', 'DEFAULT')
 voiceAssistant = sr.Recognizer()
 
@@ -49,5 +49,7 @@ while True:
             response = response.lower()
             executeResponse(response)
 
-    except Exception:
-        print(Exception)
+    except Exception as ex:
+        template = "An exception of type {0} occurred. Arguments:\n{1!r}"
+        message = template.format(type(ex).__name__, ex.args)
+        print(message)

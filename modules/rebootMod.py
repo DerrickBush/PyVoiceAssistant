@@ -1,8 +1,6 @@
 import os
 import signal
-import time
-import settings
-import voice
+import time, settings, voice
 
 class Initial:
 	def keyWord():
@@ -10,8 +8,7 @@ class Initial:
 
 	def execute(response):
 		voice.speak("Rebooting systems now")
-		os.chdir('C:/Users/derri/Documents/Projects/voiceAI/pyAI/')
+		os.chdir(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 		os.system('start python main.py &')
 		time.sleep(2)
 		os.kill(int(settings.getVal('oldpid', 'DEFAULT')), signal.SIGTERM)
-
